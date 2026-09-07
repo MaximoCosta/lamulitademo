@@ -1,0 +1,407 @@
+<title>Reservas La Mulita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --carbon:#12100F; --panel:#1B1715; --panel2:#232019; --linea:#332C26;
+  --crema:#F4EDE4; --tenue:#A2968A; --debil:#6E645C;
+  --brasa:#E2721F; --brasa-suave:#3A2011;
+  --salvia:#6E9C74; --salvia-suave:#18291B;
+  --alerta:#D8A13F; --alerta-suave:#2F2413;
+  --ui:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--carbon);color:var(--crema);font-family:var(--ui);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.flag{position:sticky;top:0;z-index:40;background:var(--crema);color:var(--carbon);font-size:12px;
+  padding:9px 18px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;justify-content:center;text-align:center}
+.flag b{font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:#9A4A0B}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 80px}
+
+.intro{padding:52px 0 30px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brasa)}
+h1{font-size:clamp(2.1rem,5.4vw,3.2rem);font-weight:800;letter-spacing:-.035em;line-height:1.02;margin:14px 0 0;text-wrap:balance}
+.intro p{color:var(--tenue);max-width:56ch;margin:16px 0 0;font-size:1.05rem}
+.intro p b{color:var(--crema);font-weight:600}
+
+/* dos telefonos */
+.duo{display:grid;gap:34px;padding:30px 0 10px;justify-content:center}
+@media(min-width:900px){.duo{grid-template-columns:repeat(2,minmax(0,392px));gap:44px}}
+.col{display:flex;flex-direction:column;gap:12px;min-width:0}
+.rotulo{display:flex;align-items:center;gap:9px}
+.rotulo .num{width:22px;height:22px;border-radius:6px;background:var(--brasa-suave);border:1px solid var(--brasa);
+  color:var(--brasa);font-family:var(--mono);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rotulo b{font-size:15px;font-weight:700}
+.rotulo span{font-size:13.5px;color:var(--tenue)}
+
+.tel{width:100%;max-width:392px;background:#000;border-radius:38px;padding:11px;
+  box-shadow:0 0 0 1px var(--linea), 0 44px 90px -50px #000, 0 0 90px -40px rgba(226,114,31,.3)}
+.pantalla{background:var(--carbon);border-radius:28px;overflow:hidden;height:660px;display:flex;flex-direction:column;position:relative}
+.barra{display:flex;justify-content:space-between;align-items:center;padding:11px 20px 3px;font-family:var(--mono);font-size:11px;color:var(--debil)}
+.cab{padding:8px 18px 13px;border-bottom:1px solid var(--linea)}
+.marca{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.marca .n{font-weight:800;font-size:1.14rem;letter-spacing:-.02em}
+.marca .d{font-family:var(--mono);font-size:11px;color:var(--tenue)}
+
+/* --- cliente --- */
+.cuerpo{flex:1;overflow-y:auto;padding:16px 18px 20px;scrollbar-width:thin}
+.campo{margin-bottom:17px}
+.campo > label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--debil);margin-bottom:8px}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip-op{background:var(--panel);border:1px solid var(--linea);color:var(--tenue);border-radius:10px;
+  padding:9px 12px;font-family:var(--ui);font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s;text-align:left}
+.chip-op[aria-pressed="true"]{background:var(--brasa-suave);border-color:var(--brasa);color:var(--crema)}
+.chip-op small{display:block;font-family:var(--mono);font-size:10px;font-weight:400;color:var(--debil);margin-top:2px}
+.chip-op[aria-pressed="true"] small{color:var(--brasa)}
+.chip-op:disabled{opacity:.4;cursor:not-allowed}
+.stepper{display:flex;align-items:center;gap:14px}
+.stepper button{width:38px;height:38px;border-radius:10px;background:var(--panel);border:1px solid var(--linea);
+  color:var(--crema);font-size:19px;cursor:pointer;line-height:1}
+.stepper .val{font-family:var(--mono);font-size:1.25rem;font-weight:600;min-width:88px;text-align:center;font-variant-numeric:tabular-nums}
+.txt{width:100%;background:var(--panel);border:1px solid var(--linea);border-radius:10px;padding:11px 12px;
+  color:var(--crema);font-family:var(--ui);font-size:14.5px}
+.txt:focus{outline:2px solid var(--brasa);outline-offset:1px}
+.pedir{width:100%;background:var(--brasa);color:#180C03;border:none;border-radius:12px;padding:14px;
+  font-family:var(--ui);font-weight:800;font-size:15.5px;cursor:pointer}
+.pedir:hover{filter:brightness(1.08)}
+.legal{font-size:11px;color:var(--debil);text-align:center;margin-top:11px}
+
+.estadoc{text-align:center;padding:26px 6px}
+.icono{width:62px;height:62px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
+  font-size:27px;font-weight:800}
+.icono.esp{background:var(--brasa-suave);border:1px solid var(--brasa);color:var(--brasa);animation:late 1.6s infinite}
+.icono.ok{background:#22371F;border:1px solid var(--salvia);color:var(--salvia)}
+.icono.no{background:var(--alerta-suave);border:1px solid var(--alerta);color:var(--alerta)}
+@keyframes late{0%,100%{opacity:1}50%{opacity:.4}}
+.estadoc h3{font-size:1.2rem;font-weight:800;margin:0 0 8px;letter-spacing:-.02em}
+.estadoc > p{color:var(--tenue);font-size:14.5px;margin:0 auto;max-width:30ch}
+.ticket{background:var(--panel);border:1px solid var(--linea);border-radius:13px;padding:15px;margin:20px 0 0;text-align:left}
+.ticket.ok{background:var(--salvia-suave);border-color:#2E4A33}
+.ticket .fila2{display:flex;justify-content:space-between;gap:10px;padding:5px 0;font-size:14px}
+.ticket .fila2 span{color:var(--tenue)}
+.ticket .fila2 b{font-family:var(--mono);font-weight:600}
+.flecha{margin-top:18px;font-size:12.5px;color:var(--brasa);font-weight:600}
+.rehacer{background:transparent;border:1px solid var(--linea);color:var(--tenue);border-radius:10px;
+  padding:10px 16px;font-family:var(--ui);font-size:13.5px;font-weight:600;cursor:pointer;margin-top:18px}
+
+/* --- salon --- */
+.resumen{display:flex;gap:8px;margin-top:12px}
+.kpi{flex:1;background:var(--panel);border:1px solid var(--linea);border-radius:11px;padding:9px 11px}
+.kpi .v{font-family:var(--mono);font-size:1.18rem;font-weight:600;font-variant-numeric:tabular-nums;line-height:1}
+.kpi .l{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--debil);margin-top:5px;font-weight:600}
+.kpi.pend .v{color:var(--alerta)}
+.seg{display:flex;gap:6px;padding:12px 18px 4px}
+.seg button{flex:1;background:var(--panel);border:1px solid var(--linea);color:var(--tenue);
+  font-family:var(--ui);font-weight:600;font-size:13.5px;padding:9px;border-radius:10px;cursor:pointer;transition:.16s}
+.seg button[aria-selected="true"]{background:var(--brasa-suave);border-color:var(--brasa);color:var(--crema)}
+.lista{flex:1;overflow-y:auto;padding:8px 18px 18px;scrollbar-width:thin}
+.turno{margin-top:15px}
+.turno-cab{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px}
+.turno-cab .t{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.05em}
+.turno-cab .c{font-family:var(--mono);font-size:11px;color:var(--tenue);font-variant-numeric:tabular-nums}
+.suj{font-size:10.5px;color:var(--debil);margin-bottom:8px}
+.barrita{height:4px;background:var(--panel2);border-radius:99px;overflow:hidden;margin:6px 0 10px}
+.barrita i{display:block;height:100%;background:var(--brasa);border-radius:99px;transition:width .45s ease}
+.barrita i.lleno{background:var(--alerta)}
+.res{background:var(--panel);border:1px solid var(--linea);border-radius:13px;padding:12px 13px;margin-bottom:8px;cursor:pointer;transition:.16s}
+.res:hover,.res:focus-visible{border-color:var(--debil)}
+.res.abierta{border-color:var(--brasa)}
+.res.confirmada{background:var(--salvia-suave);border-color:#2E4A33}
+.res.delcliente{box-shadow:0 0 0 1px var(--brasa)}
+.res .fila{display:flex;align-items:center;gap:10px}
+.res .ini{width:32px;height:32px;border-radius:9px;background:var(--panel2);display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:12.5px;color:var(--tenue);flex-shrink:0}
+.res.confirmada .ini{background:#22371F;color:var(--salvia)}
+.res .info{flex:1;min-width:0}
+.res .nom{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.res .met{font-family:var(--mono);font-size:11px;color:var(--tenue);margin-top:1px}
+.chip{font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:99px;white-space:nowrap}
+.chip.p{background:var(--alerta-suave);color:var(--alerta)}
+.chip.c{background:#22371F;color:var(--salvia)}
+.acciones{display:none;gap:8px;margin-top:11px}
+.res.abierta .acciones{display:flex}
+.acciones button{flex:1;font-family:var(--ui);font-weight:700;font-size:13.5px;padding:10px;border-radius:9px;cursor:pointer;border:1px solid transparent}
+.ok{background:var(--salvia);color:#0E1A10}
+.no{background:transparent;border-color:var(--linea);color:var(--tenue)}
+.pista{font-size:11.5px;color:var(--debil);text-align:center;padding:10px 0 2px}
+.nueva{animation:entra .5s ease}
+@keyframes entra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.aviso-nueva{background:var(--brasa-suave);border:1px solid var(--brasa);border-radius:11px;padding:9px 12px;
+  font-size:12.5px;margin-bottom:10px;display:flex;gap:8px;align-items:center}
+.punto{width:7px;height:7px;border-radius:99px;background:var(--brasa);flex-shrink:0;animation:late 1.6s infinite}
+.toast{position:absolute;left:14px;right:14px;bottom:14px;background:var(--crema);color:var(--carbon);
+  border-radius:12px;padding:11px 14px;font-size:13px;font-weight:600;opacity:0;transform:translateY(12px);
+  transition:.22s;pointer-events:none;z-index:5;box-shadow:0 12px 30px -14px #000}
+.toast.ver{opacity:1;transform:none}
+
+/* secciones */
+section.txtb{padding:52px 0 0;border-top:1px solid var(--linea);margin-top:44px}
+h2{font-size:clamp(1.35rem,3vw,1.8rem);font-weight:800;letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
+section.txtb > p{color:var(--tenue);max-width:60ch;margin:0 0 24px}
+section.txtb > p b{color:var(--crema);font-weight:600}
+.puertas{display:grid;gap:12px}
+@media(min-width:700px){.puertas{grid-template-columns:repeat(2,1fr)}}
+.puerta{background:var(--panel);border:1px solid var(--linea);border-radius:13px;padding:16px 18px}
+.puerta .n{font-family:var(--mono);font-size:11px;color:var(--brasa);font-weight:600;letter-spacing:.1em}
+.puerta b{display:block;margin:7px 0 4px;font-size:15px;font-weight:700}
+.puerta p{margin:0;font-size:14.5px;color:var(--tenue)}
+.nota{border-left:3px solid var(--alerta);background:var(--alerta-suave);border-radius:0 10px 10px 0;
+  padding:14px 16px;margin-top:20px;font-size:14.5px;max-width:66ch}
+.nota b{color:var(--crema)}
+.puntos{display:grid;gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:14px;overflow:hidden}
+.punto-fila{background:var(--panel);padding:16px 18px}
+.punto-fila b{display:block;font-size:15px;font-weight:700;margin-bottom:4px}
+.punto-fila p{margin:0;font-size:14.5px;color:var(--tenue)}
+.punto-fila .hoy{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--alerta);display:block;margin-bottom:7px}
+footer{margin-top:44px;padding-top:20px;border-top:1px solid var(--linea);font-size:12.5px;color:var(--debil)}
+footer b{color:var(--tenue)}
+:focus-visible{outline:2px solid var(--brasa);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="flag"><b>Demo</b><span>Hecha por sCode Digital Studio para La Mulita. Datos y nombres de ejemplo.</span></div>
+
+<div class="wrap">
+
+<section class="intro">
+  <div class="eyebrow">Sistema de reservas · La Mulita</div>
+  <h1>La reserva entra sola.<br>Ustedes solo confirman.</h1>
+  <p>Los dos celulares están conectados de verdad. <b>Pedí una mesa en el de la izquierda</b> y mirá cómo aparece en el de la derecha, que es el que usa quien atiende el salón. Confirmala ahí y el del cliente se actualiza solo.</p>
+</section>
+
+<div class="duo">
+  <div class="col">
+    <div class="rotulo"><span class="num">1</span><b>El cliente</b><span>desde la web o el Instagram</span></div>
+    <div class="tel"><div class="pantalla">
+      <div class="barra"><span>21:04</span><span>lamulita.com.ar</span></div>
+      <div class="cab"><div class="marca"><span class="n">Reservar mesa</span><span class="d">La Mulita</span></div></div>
+      <div class="cuerpo" id="cliente"></div>
+      <div class="toast" id="toastC"></div>
+    </div></div>
+  </div>
+
+  <div class="col">
+    <div class="rotulo"><span class="num">2</span><b>El salón</b><span>quien atiende, desde el celular</span></div>
+    <div class="tel"><div class="pantalla">
+      <div class="barra"><span>21:04</span><span>Reservas</span></div>
+      <div class="cab">
+        <div class="marca"><span class="n">La Mulita</span><span class="d">Hoy · viernes</span></div>
+        <div class="resumen">
+          <div class="kpi"><div class="v" id="kMesas">8</div><div class="l">Mesas</div></div>
+          <div class="kpi"><div class="v" id="kCub">38</div><div class="l">Cubiertos</div></div>
+          <div class="kpi pend"><div class="v" id="kPend">4</div><div class="l">A confirmar</div></div>
+        </div>
+      </div>
+      <div class="seg" role="tablist">
+        <button role="tab" aria-selected="false" data-serv="med">Mediodía</button>
+        <button role="tab" aria-selected="true" data-serv="noc">Noche</button>
+      </div>
+      <div class="lista" id="lista"></div>
+      <div class="toast" id="toastS"></div>
+    </div></div>
+  </div>
+</div>
+
+<section class="txtb">
+  <h2>Por dónde entran las reservas</h2>
+  <p>Todas caen en la misma pantalla. El WhatsApp <b>no se elimina</b>: deja de ser el único lugar donde vive la información.</p>
+  <div class="puertas">
+    <div class="puerta"><div class="n">01</div><b>La web de ustedes</b><p>Los botones «Reservar mesa» que ya tienen apuntan acá en vez de abrir un chat. Cuatro campos, sin cuenta ni app.</p></div>
+    <div class="puerta"><div class="n">02</div><b>El link del Instagram</b><p>De ahí les llega buena parte de la gente, y hoy ese link no lleva a ningún lado útil.</p></div>
+    <div class="puerta"><div class="n">03</div><b>La ficha de Google</b><p>Se le agrega el botón de reservas. Es gratis, y el que los busca en el mapa reserva sin entrar a la web.</p></div>
+    <div class="puerta"><div class="n">04</div><b>WhatsApp y teléfono</b><p>La respuesta automática que ya tienen arranca con el link. Al que igual escribe o llama, se lo carga a mano con un botón en el panel.</p></div>
+  </div>
+  <div class="nota"><b>Sobre la confirmación automática:</b> el aviso al cliente sale por mail apenas se confirma. Para que además salga por WhatsApp en automático hay que habilitar la API de Meta, que tiene una verificación y un costo mensual. Hasta entonces, desde el panel se manda de un toque con el mensaje ya escrito. Queda preparado y se activa cuando convenga.</div>
+</section>
+
+<section class="txtb">
+  <h2>Lo que reemplaza</h2>
+  <p>Cada punto salió de la web y del WhatsApp de ustedes, no de un caso genérico.</p>
+  <div class="puntos">
+    <div class="punto-fila"><span class="hoy">Hoy</span><b>«Confirmamos por WhatsApp en menos de 1 hora»</b>
+      <p>Es una promesa que alguien tiene que cumplir a mano, justo en las horas en que el salón está lleno. Acá la reserva entra sola y confirmar son dos toques, entre mesa y mesa.</p></div>
+    <div class="punto-fila"><span class="hoy">Hoy</span><b>Los segundos turnos «sujetos a disponibilidad»</b>
+      <p>Para saber si entra hay que acordarse de cuántos hay anotados. La barra lo muestra: se ve de un vistazo si el turno de las 22:15 todavía da.</p></div>
+    <div class="punto-fila"><span class="hoy">Hoy</span><b>Los feriados «se llenan rápido»</b>
+      <p>Ustedes ya lo dicen en la web. Con esto, el 12 de octubre se cierra solo cuando llega al tope, sin que nadie cuente a mano.</p></div>
+  </div>
+</section>
+
+<section class="txtb">
+  <h2>Por qué no es Woki</h2>
+  <p>Los sistemas enlatados traen mil funciones que no usan y en un celular son un lío de botones. Esto tiene <b>una sola pantalla</b> y hace una sola cosa. Sin comisión por reserva, sin que el cliente quede en la base de datos de otro, y con la marca de ustedes.</p>
+  <p>La cuenta que importa no es lo que sale: es cuántas reservas se pierden un viernes a las nueve de la noche porque el mensaje quedó sin leer cuarenta minutos. En enero, con el salón lleno, esa es la diferencia.</p>
+</section>
+
+<footer>
+  Demo funcional de <b>sCode Digital Studio</b> · Mar del Plata · scodedigital.com<br>
+  Los nombres, las reservas y los números son inventados para mostrar cómo se ve. Los turnos sí son los de ustedes.
+</footer>
+</div>
+
+<script>
+(function(){
+  var TURNOS = {
+    med:[{t:"12:30",tope:34},{t:"14:15",tope:28,seg:true}],
+    noc:[{t:"20:30",tope:34},{t:"22:15",tope:28,seg:true}]
+  };
+  var datos = {
+    med:[
+      {r:[{n:"Familia Ledesma",p:6,h:"12:30",est:"c"},{n:"Carla Bianchi",p:2,h:"12:45",est:"c"},{n:"Diego Sosa",p:4,h:"12:30",est:"p"}]},
+      {r:[{n:"Marta Iglesias",p:3,h:"14:30",est:"p"}]}
+    ],
+    noc:[
+      {r:[{n:"Nicolás Ferrari",p:2,h:"20:30",est:"c"},{n:"Grupo Aramburu",p:12,h:"20:45",est:"p",nota:"mesa larga"},{n:"Lucía Peralta",p:4,h:"20:30",est:"c"}]},
+      {r:[{n:"Tomás Vidal",p:5,h:"22:15",est:"p"}]}
+    ]
+  };
+  var serv="noc", abierta=null, avisoNuevo=false;
+  var form={dia:"Hoy · viernes", serv:"noc", turno:0, p:2, n:"Sofía Rendo", tel:"223 555-0198"};
+  var fase="form", miRef=null;
+
+  var lista=document.getElementById('lista'), cli=document.getElementById('cliente');
+  var tS=document.getElementById('toastS'), tC=document.getElementById('toastC'), h1,h2;
+
+  function av(el,msg,ref){ el.textContent=msg; el.classList.add('ver');
+    clearTimeout(ref==='s'?h1:h2);
+    var id=setTimeout(function(){el.classList.remove('ver');},3000);
+    if(ref==='s') h1=id; else h2=id; }
+  function ini(n){ var p=n.replace(/^(Familia|Grupo)\s+/,'').split(/\s+/);
+    return ((p[0]||'')[0]||'')+((p[1]||'')[0]||''); }
+  function ocup(s,i){ return datos[s][i].r.reduce(function(a,r){return a+(r.est==='x'?0:r.p);},0); }
+  function libres(s,i){ return Math.max(0, TURNOS[s][i].tope - ocup(s,i)); }
+  function cuenta(){ var m=0,c=0,p=0;
+    ['med','noc'].forEach(function(s){ datos[s].forEach(function(t){ t.r.forEach(function(r){
+      if(r.est!=='x'){m++;c+=r.p;} if(r.est==='p')p++; });});});
+    document.getElementById('kMesas').textContent=m;
+    document.getElementById('kCub').textContent=c;
+    document.getElementById('kPend').textContent=p; }
+
+  /* ---------- cliente ---------- */
+  function pintarCliente(){
+    if(fase==="form"){
+      var T=TURNOS[form.serv];
+      cli.innerHTML =
+        '<div class="campo"><label>¿Qué día?</label><div class="chips">'+
+          ['Hoy · viernes','Sábado 6','Domingo 7'].map(function(d){
+            return '<button class="chip-op" data-k="dia" data-v="'+d+'" aria-pressed="'+(form.dia===d)+'">'+d+'</button>';}).join('')+
+        '</div></div>'+
+        '<div class="campo"><label>¿Mediodía o noche?</label><div class="chips">'+
+          '<button class="chip-op" data-k="serv" data-v="med" aria-pressed="'+(form.serv==='med')+'">Mediodía</button>'+
+          '<button class="chip-op" data-k="serv" data-v="noc" aria-pressed="'+(form.serv==='noc')+'">Noche</button>'+
+        '</div></div>'+
+        '<div class="campo"><label>Turno</label><div class="chips">'+
+          T.map(function(t,i){ var l=libres(form.serv,i);
+            return '<button class="chip-op" data-k="turno" data-v="'+i+'" aria-pressed="'+(form.turno===i)+'"'+(l<form.p?' disabled':'')+'>'+
+              t.t+'<small>'+(l<form.p?'completo':'quedan '+l+' lugares')+'</small></button>';}).join('')+
+        '</div></div>'+
+        '<div class="campo"><label>¿Cuántos son?</label><div class="stepper">'+
+          '<button data-k="menos" aria-label="Menos">−</button>'+
+          '<span class="val">'+form.p+(form.p===1?' persona':' personas')+'</span>'+
+          '<button data-k="mas" aria-label="Más">+</button>'+
+        '</div></div>'+
+        '<div class="campo"><label>A nombre de</label><input class="txt" id="fN" value="'+form.n+'"></div>'+
+        '<div class="campo"><label>WhatsApp</label><input class="txt" id="fT" value="'+form.tel+'"></div>'+
+        '<button class="pedir" data-k="enviar">Pedir la reserva</button>'+
+        '<p class="legal">Sin cuenta ni aplicación. Te avisamos cuando el salón la confirme.</p>';
+    } else {
+      var t=TURNOS[miRef.s][miRef.i].t;
+      var tk='<div class="ticket'+(fase==="ok"?' ok':'')+'">'+
+        '<div class="fila2"><span>A nombre de</span><b>'+form.n+'</b></div>'+
+        '<div class="fila2"><span>Día</span><b>'+form.dia+'</b></div>'+
+        '<div class="fila2"><span>Turno</span><b>'+t+'</b></div>'+
+        '<div class="fila2"><span>Personas</span><b>'+form.p+'</b></div></div>';
+      if(fase==="esp") cli.innerHTML='<div class="estadoc"><div class="icono esp">·</div>'+
+        '<h3>Pedido enviado</h3><p>El salón lo está mirando. Te avisamos por WhatsApp apenas lo confirmen.</p>'+tk+
+        '<p class="flecha">→ Confirmala en el celular del salón</p></div>';
+      if(fase==="ok") cli.innerHTML='<div class="estadoc"><div class="icono ok">✓</div>'+
+        '<h3>Mesa confirmada</h3><p>Te llegó el aviso al WhatsApp con el horario y la dirección.</p>'+tk+
+        '<button class="rehacer" data-k="reset">Pedir otra</button></div>';
+      if(fase==="no") cli.innerHTML='<div class="estadoc"><div class="icono no">!</div>'+
+        '<h3>Ese turno se completó</h3><p>El salón te ofrece el otro turno del mismo día.</p>'+tk+
+        '<button class="rehacer" data-k="reset">Elegir otro turno</button></div>';
+    }
+  }
+  cli.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var k=b.dataset.k;
+    if(k==='dia'||k==='serv'){ form[k]=b.dataset.v; if(k==='serv') form.turno=0; pintarCliente(); return; }
+    if(k==='turno'){ form.turno=+b.dataset.v; pintarCliente(); return; }
+    if(k==='menos'){ form.p=Math.max(1,form.p-1); pintarCliente(); return; }
+    if(k==='mas'){ form.p=Math.min(20,form.p+1); pintarCliente(); return; }
+    if(k==='reset'){ fase="form"; miRef=null; pintarCliente(); return; }
+    if(k==='enviar'){
+      var n=document.getElementById('fN').value.trim()||"Cliente";
+      form.n=n; form.tel=document.getElementById('fT').value.trim();
+      var s=form.serv, i=form.turno;
+      if(libres(s,i)<form.p){ av(tC,'Ese turno ya no tiene lugar.','c'); return; }
+      var nueva={n:n,p:form.p,h:TURNOS[s][i].t,est:"p",nueva:true,mio:true};
+      datos[s][i].r.unshift(nueva);
+      miRef={s:s,i:i,o:nueva};
+      fase="esp"; avisoNuevo=true;
+      serv=s;
+      document.querySelectorAll('.seg button').forEach(function(x){
+        x.setAttribute('aria-selected', String(x.dataset.serv===s)); });
+      pintarCliente(); pintarSalon();
+      av(tS,'Nueva reserva: '+n+', '+form.p+' personas, '+TURNOS[s][i].t+'.','s');
+    }
+  });
+
+  /* ---------- salon ---------- */
+  function pintarSalon(){
+    var html='';
+    if(avisoNuevo) html+='<div class="aviso-nueva"><span class="punto"></span><span>Entró una reserva nueva hace un momento</span></div>';
+    datos[serv].forEach(function(t,ti){
+      var T=TURNOS[serv][ti], o=ocup(serv,ti), pct=Math.min(100,Math.round(o/T.tope*100));
+      html+='<div class="turno"><div class="turno-cab"><span class="t">'+(ti===0?'1º turno · ':'2º turno · ')+T.t+'</span>'+
+        '<span class="c">'+o+'/'+T.tope+' cubiertos</span></div>'+
+        (T.seg?'<div class="suj">Sujeto a disponibilidad</div>':'')+
+        '<div class="barrita"><i class="'+(pct>85?'lleno':'')+'" style="width:'+pct+'%"></i></div>';
+      t.r.forEach(function(r,ri){
+        if(r.est==='x') return;
+        var c=r.est==='c', id=serv+'-'+ti+'-'+ri;
+        html+='<div class="res'+(c?' confirmada':'')+(abierta===id?' abierta':'')+(r.nueva?' nueva':'')+(r.mio?' delcliente':'')+'" data-id="'+id+'" tabindex="0" role="button">'+
+          '<div class="fila"><div class="ini">'+ini(r.n)+'</div><div class="info">'+
+          '<div class="nom">'+r.n+'</div><div class="met">'+r.h+' · '+r.p+' personas'+(r.nota?' · '+r.nota:'')+'</div></div>'+
+          '<span class="chip '+(c?'c':'p')+'">'+(c?'Confirmada':'Pendiente')+'</span></div>'+
+          (c?'':'<div class="acciones"><button class="ok" data-a="ok">Confirmar</button><button class="no" data-a="no">Rechazar</button></div>')+
+          '</div>';
+      });
+      html+='</div>';
+    });
+    html+='<div class="pista">Tocá una reserva pendiente para confirmarla</div>';
+    lista.innerHTML=html;
+    ['med','noc'].forEach(function(s){datos[s].forEach(function(t){t.r.forEach(function(r){delete r.nueva;});});});
+    cuenta();
+  }
+  function buscar(id){ var p=id.split('-'); return datos[p[0]][+p[1]].r[+p[2]]; }
+  lista.addEventListener('click',function(e){
+    var btn=e.target.closest('button[data-a]'), card=e.target.closest('.res');
+    if(!card) return;
+    var r=buscar(card.dataset.id);
+    if(btn){
+      e.stopPropagation();
+      if(btn.dataset.a==='ok'){ r.est='c'; abierta=null; pintarSalon();
+        av(tS,'Confirmada. Le llegó el WhatsApp a '+r.n.split(' ')[0]+'.','s');
+        if(miRef&&miRef.o===r){ fase="ok"; pintarCliente(); av(tC,'Tu mesa quedó confirmada.','c'); } }
+      else { r.est='x'; abierta=null; pintarSalon(); av(tS,'Rechazada. Se le ofreció el otro turno.','s');
+        if(miRef&&miRef.o===r){ fase="no"; pintarCliente(); } }
+      return;
+    }
+    if(r.est==='c'){ av(tS,r.n+' ya está confirmada.','s'); return; }
+    abierta=(abierta===card.dataset.id)?null:card.dataset.id;
+    pintarSalon();
+  });
+  lista.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){ var c=e.target.closest('.res'); if(c){ e.preventDefault(); c.click(); } }
+  });
+  document.querySelectorAll('.seg button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-selected','false');});
+      b.setAttribute('aria-selected','true'); serv=b.dataset.serv; abierta=null; pintarSalon(); });
+  });
+
+  pintarCliente(); pintarSalon();
+})();
+</script>
